@@ -98,16 +98,20 @@ class EmptyInfoView: UIView {
             contentsView.addConstraint(NSLayoutConstraint(item: detailLabel, attribute: .left, relatedBy: .equal, toItem: contentsView, attribute: .left, multiplier: 1, constant: 0))
             contentsView.addConstraint(NSLayoutConstraint(item: detailLabel, attribute: .right, relatedBy: .equal, toItem: contentsView, attribute: .right, multiplier: 1, constant: 0))
         } else {
-            titleLabel.removeFromSuperview()
+            detailLabel.removeFromSuperview()
         }
         
         if viewStrArr.count > 0 {
             var formatStr = String()
             for (index, str) in viewStrArr.enumerated() {
-                formatStr.append("[\(str)]")
                 if index < viewStrArr.count {
-                    formatStr.append("-(8)-")
+                    if index == 0 {
+                        formatStr += "-(8)"
+                    } else {
+                        formatStr += "(8)"
+                    }
                 }
+                formatStr += "-[\(str)]-"
             }
             contentsView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|\(formatStr)|", options: [], metrics: nil, views: viewDic))
         }
