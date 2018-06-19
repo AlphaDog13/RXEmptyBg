@@ -5,6 +5,7 @@ Pod::Spec.new do |s|
   s.summary      = "An notice view for empty scrollView and its's subClass "
 
   s.homepage     = "https://github.com/AlphaDog13/RXEmptyBg"
+  s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author       = "AlphaDog13"
 
   s.source       = { :git => "https://github.com/AlphaDog13/RXEmptyBg.git", :tag => s.version.to_s }
