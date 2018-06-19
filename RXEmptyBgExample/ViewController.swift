@@ -37,7 +37,7 @@ class ViewController: UIViewController {
 
     func layout() {
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[\(controllers.TableView)]-|", options: [], metrics: nil, views: [controllers.TableView : tableView]))
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[\(controllers.TableView)]-|", options: [], metrics: nil, views: [controllers.TableView : tableView]))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[\(controllers.TableView)]-(16)-|", options: [], metrics: nil, views: [controllers.TableView : tableView]))
     }
     
     func changeBgInfo() {

@@ -146,7 +146,7 @@ extension UIScrollView {
     }
     
     private func makeEmptyBg() -> EmptyInfoView {
-        let view = EmptyInfoView(frame: frame)
+        let view = EmptyInfoView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height))
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         if emptyInfoViewTapEnable() {
             let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(emptyBgViewAction))
