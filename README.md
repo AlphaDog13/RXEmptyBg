@@ -11,7 +11,7 @@
 
 ## 样例
 
-![](https://github.com/AlphaDog13/RXCalendarView/blob/master/IMB_JD4rri.GIF) 
+![](https://github.com/AlphaDog13/RXCalendarView/blob/master/IMB_v8DCxy.GIF) 
 
 
 ## 需要

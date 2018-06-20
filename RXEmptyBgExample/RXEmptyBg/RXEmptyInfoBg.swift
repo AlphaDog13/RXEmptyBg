@@ -89,7 +89,7 @@ extension UIScrollView {
             }
         }
         
-        emptyBgView.prepareForDisplay()
+//        emptyBgView.prepareForDisplay()
         emptyBgView.noticeImgView.image = emptyInfoViewImg()
         emptyBgView.titleLabel.attributedText = emptyInfoViewTitle()
         emptyBgView.detailLabel.attributedText = emptyInfoViewDetail()

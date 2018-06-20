@@ -62,7 +62,7 @@ extension ViewController: EmptyBgDataSource, EmptyBgDelegate {
     }
     
     func detailForEmptyBg(in scrollView: UIScrollView) -> NSAttributedString? {
-        return NSAttributedString(string: "detail")
+        return nil
     }
     
     func emptyBgShouldDisplay(in scrollView: UIScrollView) -> Bool {
