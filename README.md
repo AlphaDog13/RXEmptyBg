@@ -1,5 +1,5 @@
 # RXEmptyBg
-参考：TBEmptyDataSet
+参考：[TBEmptyDataSet](https://github.com/teambition/TBEmptyDataSet)
 
 ## 内容
 
