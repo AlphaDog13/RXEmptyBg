@@ -13,6 +13,7 @@ public protocol EmptyBgDataSource {
     func imgForEmptyBg(in scrollView: UIScrollView) -> UIImage?
     func titleForEmptyBg(in scrollView: UIScrollView) -> NSAttributedString?
     func detailForEmptyBg(in scrollView: UIScrollView) -> NSAttributedString?
+    func actionBtnForEmptyBg(in scrollView: UIScrollView) -> String?
 }
 
 @objc(EmptyBgDelegate)
@@ -21,7 +22,8 @@ public protocol EmptyBgDelegate {
     func emptyBgShouldTap(in scrollView: UIScrollView) -> Bool
     
     func emptyBgTapAction(in scrollView: UIScrollView)
-    
+    func emptyBtnAction(in scrollView: UIScrollView)
+
     func emptyBgWillDisplay(in scrollView: UIScrollView)
     func emptyBgDidDisplay(in scrollView: UIScrollView)
 }

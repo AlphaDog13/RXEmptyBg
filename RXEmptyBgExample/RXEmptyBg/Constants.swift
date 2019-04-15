@@ -8,6 +8,9 @@
 
 import UIKit
 
+var tableOnce: NSInteger = 0
+var collectionOnce: NSInteger = 0
+
 struct AssociatedKey {
     static var emptyInfoDataSource = "emptyInfoDataSource"
     static var emptyInfoDelegate = "emptyInfoDelegate"

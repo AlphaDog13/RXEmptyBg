@@ -16,6 +16,7 @@ class EmptyInfoView: UIView {
         static let noticeImgView = "noticeImgView"
         static let titleLabel = "titleLabel"
         static let detailLabel = "detailLabel"
+        static let actionBtn = "actionBtn"
     }
     
     var tapGesture: UITapGestureRecognizer?
@@ -52,6 +53,17 @@ class EmptyInfoView: UIView {
         label.textAlignment = .center
         contentsView.addSubview(label)
         return label
+    }()
+    
+    lazy var actionBtn: UIButton = {
+        let btn = UIButton(type: UIButtonType.custom)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.layer.cornerRadius = 4
+        btn.layer.borderColor = hexadecimalColor(hexadecimal: "#007eea").cgColor
+        btn.layer.borderWidth = 0.5
+        btn.setTitleColor(hexadecimalColor(hexadecimal: "#007eea"), for: .normal)
+        contentsView.addSubview(btn)
+        return btn
     }()
     
     // MARK: - Init
@@ -99,6 +111,14 @@ class EmptyInfoView: UIView {
             contentsView.addConstraint(NSLayoutConstraint(item: detailLabel, attribute: .right, relatedBy: .equal, toItem: contentsView, attribute: .right, multiplier: 1, constant: 0))
         } else {
             detailLabel.removeFromSuperview()
+        }
+        
+        if canShowActionBtn() {
+            viewStrArr.append(controllerStruct.actionBtn)
+            viewDic[controllerStruct.actionBtn] = actionBtn
+            contentsView.addConstraint(NSLayoutConstraint(item: actionBtn, attribute: .centerX, relatedBy: .equal, toItem: contentsView, attribute: .centerX, multiplier: 1, constant: 0))
+        } else {
+            actionBtn.removeFromSuperview()
         }
         
         if viewStrArr.count > 0 {
@@ -150,4 +170,44 @@ class EmptyInfoView: UIView {
         return false
     }
 
+    private func canShowActionBtn() -> Bool {
+        if let text = actionBtn.titleLabel?.text {
+            return text.trimmingCharacters(in: .whitespaces).count > 0
+        }
+        return false
+    }
+    
+    func hexadecimalColor(hexadecimal:String) -> UIColor {
+        var cstr = hexadecimal.trimmingCharacters(in:  CharacterSet.whitespacesAndNewlines).uppercased() as NSString;
+        if(cstr.length < 6){
+            return UIColor.clear;
+        }
+        if(cstr.hasPrefix("0X")){
+            cstr = cstr.substring(from: 2) as NSString
+        }
+        if(cstr.hasPrefix("#")){
+            cstr = cstr.substring(from: 1) as NSString
+        }
+        if(cstr.length != 6){
+            return UIColor.clear;
+        }
+        var range = NSRange.init()
+        range.location = 0
+        range.length = 2
+        //r
+        let rStr = cstr.substring(with: range);
+        //g
+        range.location = 2;
+        let gStr = cstr.substring(with: range)
+        //b
+        range.location = 4;
+        let bStr = cstr.substring(with: range)
+        var r :UInt32 = 0x0;
+        var g :UInt32 = 0x0;
+        var b :UInt32 = 0x0;
+        Scanner.init(string: rStr).scanHexInt32(&r);
+        Scanner.init(string: gStr).scanHexInt32(&g);
+        Scanner.init(string: bStr).scanHexInt32(&b);
+        return UIColor.init(red: CGFloat(r)/255.0, green: CGFloat(g)/255.0, blue: CGFloat(b)/255.0, alpha: 1);
+    }
 }

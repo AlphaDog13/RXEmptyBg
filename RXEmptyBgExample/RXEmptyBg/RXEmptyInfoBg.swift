@@ -22,11 +22,17 @@ extension UIScrollView {
                 
                 switch self {
                 case is UITableView:
-                    UITableView.rx_swizzleTableViewReload()
-                    UITableView.rx_swizzleTableViewEndUpdates()
+                    if 0 == tableOnce {
+                        UITableView.rx_swizzleTableViewReload()
+                        UITableView.rx_swizzleTableViewEndUpdates()
+                        tableOnce = 1
+                    }
                 case is UICollectionView:
-                    UICollectionView.rx_swizzleTableViewReload()
-                    UICollectionView.rx_swizzleCollectionPerformBatchUpdates()
+                    if 0 == collectionOnce {
+                        UICollectionView.rx_swizzleTableViewReload()
+                        UICollectionView.rx_swizzleCollectionPerformBatchUpdates()
+                        collectionOnce = 1
+                    }
                 default:
                     break
                 }
@@ -89,10 +95,12 @@ extension UIScrollView {
             }
         }
         
-//        emptyBgView.prepareForDisplay()
+        //        emptyBgView.prepareForDisplay()
         emptyBgView.noticeImgView.image = emptyInfoViewImg()
         emptyBgView.titleLabel.attributedText = emptyInfoViewTitle()
         emptyBgView.detailLabel.attributedText = emptyInfoViewDetail()
+        emptyBgView.actionBtn.setTitle("  \(emptyInfoViewActionBtn())  ", for: .normal)
+        emptyBgView.actionBtn.addTarget(self, action: #selector(emptyInfoViewBtnAction), for: .touchUpInside)
         emptyBgView.tapGesture?.isEnabled = emptyInfoViewTapEnable()
         emptyBgView.isHidden = false
         
@@ -104,13 +112,13 @@ extension UIScrollView {
     
     // MARK: - Function
     fileprivate func invalidEmptyInfoView() {
-//        emptyDataSetDelegate?.emptyDataSetWillDisappear(in: self)
+        //        emptyDataSetDelegate?.emptyDataSetWillDisappear(in: self)
         
         emptyInfoView?.removeFromSuperview()
         emptyInfoView = nil
         isScrollEnabled = true
         
-//        emptyDataSetDelegate?.emptyDataSetDidDisappear(in: self)
+        //        emptyDataSetDelegate?.emptyDataSetDidDisappear(in: self)
     }
     
     private func emptyInfoBgAvailable() -> Bool {
@@ -175,6 +183,11 @@ extension UIScrollView {
         emptyBgDelegate?.emptyBgTapAction(in: self)
     }
     
+    @objc
+    private func emptyInfoViewBtnAction() {
+        emptyBgDelegate?.emptyBtnAction(in: self)
+    }
+    
     // MARK: - EmptyBgDataSource & EmptyBgDelegate
     private func emptyInfoViewImg() -> UIImage? {
         return emptyBgDataSource?.imgForEmptyBg(in: self)
@@ -186,6 +199,10 @@ extension UIScrollView {
     
     private func emptyInfoViewDetail() -> NSAttributedString? {
         return emptyBgDataSource?.detailForEmptyBg(in: self)
+    }
+    
+    private func emptyInfoViewActionBtn() -> String {
+        return emptyBgDataSource?.actionBtnForEmptyBg(in: self) ?? ""
     }
     
     private func emptyInfoViewShouldDisplay() -> Bool {
