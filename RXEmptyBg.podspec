@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "RXEmptyBg"
-  s.version      = "0.2.0"
+  s.version      = "0.2.1"
   s.summary      = "An notice view for empty scrollView and its's subClass "
 
   s.homepage     = "https://github.com/AlphaDog13/RXEmptyBg"
